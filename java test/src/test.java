@@ -42,62 +42,54 @@ public class test {
 	      ListNode(int x) { val = x; }
 	  }
 	
-	
+	public ListNode betterMergeTwoLists(ListNode l1, ListNode l2) {
+	        if(l1 == null) return l2;
+	        if(l2 == null) return l1;
+
+	        if(l1.val > l2.val) {
+	            ListNode temp = l2;
+	            temp.next = betterMergeTwoLists(l1, l2.next);
+	            return temp;
+	        } else {
+	            ListNode temp = l1;
+	            temp.next = betterMergeTwoLists(l1.next, l2);
+	            return temp;
+	    }
+	}
+	  
+	  
+	  
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-    	ListNode l1progress = l1;
-    	ListNode l2progress = l2;
     	ListNode result;
-        ListNode resultprogress;
-        if(l1 == null){
-            return l2;
-        }
-        if(l2 == null){
-            return l1;
-        }
+    	ListNode resultprogress;
     	if(l1.val <= l2.val) {
     		result = new ListNode(l1.val);
-    		l1progress = l1progress.next;
-            resultprogress = result;
-    		while(l1progress != null || l2progress != null) {
-                if(l1progress == null){
-                    resultprogress.next = l2progress;
-                }
-                else if (l2progress == null){
-                    resultprogress.next = l1progress;
-                }
-    			else if(l1progress.val <= l2progress.val) {
-    				resultprogress.next = new ListNode(l1progress.val);
-                    resultprogress = resultprogress.next;
-    				l1progress = l1progress.next;
-    			}
-    			else {
-    				resultprogress.next = new ListNode(l2progress.val);
-                    resultprogress = resultprogress.next;
-    				l2progress = l2progress.next;
-    			}
-    		}
+    		l1 = l1.next;
+    		resultprogress = result;
     	}
     	else {
     		result = new ListNode(l2.val);
-    		l2progress = l2progress.next;
-            resultprogress = result;
-    		while(l1progress != null && l2progress != null) {
-    			 if(l1progress == null){
-                    resultprogress.next = l2progress;
-                }
-                else if (l2progress == null){
-                    resultprogress.next = l1progress;
-                }
-    			else if(l1progress.val <= l2progress.val) {
-    				resultprogress.next = new ListNode(l1progress.val);
-                    resultprogress = resultprogress.next;
-    				l1progress = l1progress.next;
-    			}
-    			else {
-    				resultprogress.next = new ListNode(l2progress.val);
-                    resultprogress = resultprogress.next;
-    				l2progress = l2progress.next;
-    			}
+    		l2 = l2.next;
+    		resultprogress = result;
+    	}
+    	while(!(l1 == null && l2 == null)) {
+    		if(l1 == null) {
+    			resultprogress.next = l2;
+    			l2 = null;
+    		}
+    		else if (l2 == null) {
+    			resultprogress.next = l1;
+    			l1 = null;
+    		}
+    		else if (l1.val <= l2.val) {
+    			resultprogress.next = new ListNode(l1.val);
+    			resultprogress = resultprogress.next;
+    			l1 = l1.next;
+    		}
+    		else {
+    			resultprogress.next = new ListNode(l2.val);
+    			resultprogress = resultprogress.next;
+    			l2 = l2.next;
     		}
     	}
     	return result;
@@ -172,5 +164,14 @@ public class test {
 		 //System.out.println(longestCommonPrefix(trya));
 		 String test= "(])";
 		 isValid(test);
+		 
+		 test test1 = new test();
+		 ListNode a = test1.new ListNode(1);
+		 ListNode b = test1.new ListNode(1);
+		 a.next = test1.new ListNode(2);
+		 a.next.next = test1.new ListNode(4);
+		 b.next = test1.new ListNode(3);
+		 b.next.next = test1.new ListNode(4);
+		 test1.mergeTwoLists(a, b);
 	 }
 }
