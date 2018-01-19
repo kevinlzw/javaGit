@@ -35,6 +35,75 @@ public class test {
 		return result;
     }
 	
+	  //Definition for singly-linked list.
+	  public class ListNode {
+	      int val;
+	      ListNode next;
+	      ListNode(int x) { val = x; }
+	  }
+	
+	
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+    	ListNode l1progress = l1;
+    	ListNode l2progress = l2;
+    	ListNode result;
+        ListNode resultprogress;
+        if(l1 == null){
+            return l2;
+        }
+        if(l2 == null){
+            return l1;
+        }
+    	if(l1.val <= l2.val) {
+    		result = new ListNode(l1.val);
+    		l1progress = l1progress.next;
+            resultprogress = result;
+    		while(l1progress != null || l2progress != null) {
+                if(l1progress == null){
+                    resultprogress.next = l2progress;
+                }
+                else if (l2progress == null){
+                    resultprogress.next = l1progress;
+                }
+    			else if(l1progress.val <= l2progress.val) {
+    				resultprogress.next = new ListNode(l1progress.val);
+                    resultprogress = resultprogress.next;
+    				l1progress = l1progress.next;
+    			}
+    			else {
+    				resultprogress.next = new ListNode(l2progress.val);
+                    resultprogress = resultprogress.next;
+    				l2progress = l2progress.next;
+    			}
+    		}
+    	}
+    	else {
+    		result = new ListNode(l2.val);
+    		l2progress = l2progress.next;
+            resultprogress = result;
+    		while(l1progress != null && l2progress != null) {
+    			 if(l1progress == null){
+                    resultprogress.next = l2progress;
+                }
+                else if (l2progress == null){
+                    resultprogress.next = l1progress;
+                }
+    			else if(l1progress.val <= l2progress.val) {
+    				resultprogress.next = new ListNode(l1progress.val);
+                    resultprogress = resultprogress.next;
+    				l1progress = l1progress.next;
+    			}
+    			else {
+    				resultprogress.next = new ListNode(l2progress.val);
+                    resultprogress = resultprogress.next;
+    				l2progress = l2progress.next;
+    			}
+    		}
+    	}
+    	return result;
+    }
+	
+	
 	
 	public static boolean isValid(String s) {
 		HashMap<Character, Character> mapping = new HashMap<Character, Character>();
