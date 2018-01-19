@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.Stack;
 
 public class test {
 
@@ -35,6 +36,27 @@ public class test {
     }
 	
 	
+	public static boolean isValid(String s) {
+		HashMap<Character, Character> mapping = new HashMap<Character, Character>();
+		mapping.put(')', '(');
+		mapping.put('}', '{');
+		mapping.put(']', '[');
+		Stack<Character> stack = new Stack<Character>();
+		for(int i = 0; i < s.length(); i ++) {
+			if(s.charAt(i) == '[' || s.charAt(i) == '{' || s.charAt(i) == '(') {
+				stack.add(s.charAt(i));
+			}
+			else {
+				if(mapping.get(s.charAt(i)) == stack.peek()) {
+					stack.pop();
+				}
+				else {
+					return false;
+				}
+			}
+		}
+		return stack.empty();
+	}
 	
 	
 	
@@ -78,6 +100,8 @@ public class test {
 		 String[] trya = new String[2];
 		 trya[0] = "aa";
 		 trya[1] = "a";
-		 System.out.println(longestCommonPrefix(trya));
+		 //System.out.println(longestCommonPrefix(trya));
+		 String test= "(])";
+		 isValid(test);
 	 }
 }
