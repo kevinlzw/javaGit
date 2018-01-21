@@ -95,7 +95,28 @@ public class test {
     	return result;
     }
 	
-	
+    
+    public int strStr(String haystack, String needle) {
+    	  for (int i = 0; ; i++) {
+    	    for (int j = 0; ; j++) {
+    	      if (j == needle.length()) return i;
+    	      if (i + j == haystack.length()) return -1;
+    	      if (needle.charAt(j) != haystack.charAt(i + j)) break;
+    	    }
+    	  }
+    	}
+    
+    
+    public int removeElement(int[] nums, int val) {
+    	int length = 0;
+    	for(int i=0; i<nums.length;i++) {
+    		if(nums[i] != val) {
+    			nums[length] = nums[i];
+    			length++;
+    		}
+    	}
+    	return length;
+    }
 	
 	public static boolean isValid(String s) {
 		HashMap<Character, Character> mapping = new HashMap<Character, Character>();
