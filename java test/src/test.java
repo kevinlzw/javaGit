@@ -3,6 +3,30 @@ import java.util.Stack;
 
 public class test {
 
+	
+	
+    public int searchInsert(int[] nums, int target) {
+    	for(int i=0; i<nums.length;i++) {
+    		if(nums[i] == target) {
+    			return i;
+    		}
+    		else if (i == 0 && nums[i] > target) {
+    			return 0;
+    		}
+    		else if (i == nums.length-1) {
+    			return nums.length;
+    		}
+    		else if (nums[i] < target && nums[i+1] > target) {
+    			return i+1;
+    		}
+    		else {
+    		}
+    	}
+    	return 0;
+    }
+	
+	
+	
 	public static String longestCommonPrefix(String[] strs) {
 		if(strs.length==0) {
 			return "";
@@ -96,7 +120,7 @@ public class test {
     }
 	
     
-    public int strStr(String haystack, String needle) {
+    public static int strStr(String haystack, String needle) {
     	  for (int i = 0; ; i++) {
     	    for (int j = 0; ; j++) {
     	      if (j == needle.length()) return i;
@@ -194,5 +218,8 @@ public class test {
 		 b.next = test1.new ListNode(3);
 		 b.next.next = test1.new ListNode(4);
 		 test1.mergeTwoLists(a, b);
+		 String strtest = "interesting";
+		 String strsubtest = "est";
+		 strStr(strtest,strsubtest);
 	 }
 }
