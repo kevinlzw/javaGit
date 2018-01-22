@@ -2,7 +2,66 @@ import java.util.HashMap;
 import java.util.Stack;
 
 public class test {
+	
+	
+    public static String countAndSay(int n) {
+    	if(n == 1) {
+    		return "1";
+    	}
+    	else {
+    		return countOnce(countAndSay(n-1));
+    	}
+    }
+    
+    public int maxSubArray(int[] nums) {
+    	int currentmax = nums[0];
+    	int max = nums[0];
+    	for(int i=1;i<nums.length;i++) {
+    		currentmax = Math.max(currentmax + nums[i], nums[i]);
+    		if(currentmax > max) {
+    			max = currentmax;
+    		}
+    	}
+    	return max;
+    }
+    
+    
+    
+    public static String countOnce(String res){
+    	char c = res.charAt(0);
+    	int num=1;
+    	StringBuilder sb = new StringBuilder();
+    	for(int i=1;i<res.length();i++){
+    		if(res.charAt(i)==c){
+    			num++;
+    			continue;
+    	}
+    	sb.append(String.valueOf(num)+c);
+    	c=res.charAt(i);
+    	num=1;
+    	}
+    	sb.append(String.valueOf(num)+c);
+    	return sb.toString();
+    	}
+    /*public static String countAndSayHelper(String input) {
+    	int count = 1;
+    	String result = "";
+    	char[] chararray = input.toCharArray();
+    	for(int i=0; i<chararray.length-1;i++) {
+    		if(chararray[i] == chararray[i+1]) {
+    			count++;
+    		}
+    		else {
+    			result+= count + chararray[i];
+    		}
+    	}
 
+    	if(input.equals("1")) {
+    		return "11";
+    	}
+    	return result;
+    }
+	*/
 	
 	
     public int searchInsert(int[] nums, int target) {
@@ -221,5 +280,6 @@ public class test {
 		 String strtest = "interesting";
 		 String strsubtest = "est";
 		 strStr(strtest,strsubtest);
+		 countAndSay(4);
 	 }
 }
