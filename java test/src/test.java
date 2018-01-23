@@ -23,8 +23,11 @@ public class test {
     public int lengthOfLastWord(String s) {
     	int lastindexspace = s.lastIndexOf(" ");
     	if(lastindexspace == -1) {
-    		return 0;
+    		return s.length();
     	}
+        if(lastindexspace == s.length()-1){
+            return lengthOfLastWord(s.substring(0,s.length()-1));    
+        }
     	return s.substring(lastindexspace+1, s.length()).length();
     }
     
