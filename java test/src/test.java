@@ -13,6 +13,22 @@ public class test {
     	}
     }
     
+    public int lengthOfLastWordBetter(String s) {
+    	s = s.trim();	//去掉首尾空格（非常实用）
+        int lastIndex = s.lastIndexOf(' ') + 1;
+        return s.length() - lastIndex;
+    }
+    
+    
+    public int lengthOfLastWord(String s) {
+    	int lastindexspace = s.lastIndexOf(" ");
+    	if(lastindexspace == -1) {
+    		return 0;
+    	}
+    	return s.substring(lastindexspace+1, s.length()).length();
+    }
+    
+    
     public int maxSubArray(int[] nums) {
     	int currentmax = nums[0];
     	int max = nums[0];
