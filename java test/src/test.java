@@ -3,6 +3,41 @@ import java.util.Stack;
 
 public class test {
 	
+	public String addBinary(String a, String b) {
+		int maxLen = Math.max(a.length(), b.length());  
+	    StringBuilder sb = new StringBuilder();  
+	    int carry = 0;  
+	    for (int i = 0; i < maxLen; i++) { //从右边开始逐位取出字符串 a、b 的字符值 tempA 和 tempB，如果长度不足，则用0替代  
+	        int tempA = a.length() > i ? a.charAt(a.length() - i - 1) - '0' : 0;  
+	        int tempB = b.length() > i ? b.charAt(b.length() - i - 1) - '0' : 0;  
+	        sb.insert(0, (tempA + tempB + carry) % 2);  //在最左侧插入相加结果  
+	        carry = tempA + tempB + carry > 1 ? 1 : 0;  //得到进位  
+	    }  
+	    if (carry == 1) sb.insert(0, 1);  //如果最高位有进位，则最高位还要加一位 1  
+	    return sb.toString();  
+    }
+	
+	
+	public static int[] plusOne(int[] digits) {
+		for(int i=digits.length-1; i>=0; i--) {
+			if(digits[i] != 9) {
+				digits[i]++;
+				return digits;
+			}
+			else if(i == 0 && digits[0] == 9) {
+				int[] newresult = new int[digits.length+1];
+				newresult[0] = 1;
+				return newresult;
+			}
+			else if (digits[i] == 9) {
+				digits[i] = 0;
+				continue;
+			}
+		}
+		return new int[1];
+    }
+	
+	
 	
     public static String countAndSay(int n) {
     	if(n == 1) {
@@ -300,5 +335,17 @@ public class test {
 		 String strsubtest = "est";
 		 strStr(strtest,strsubtest);
 		 countAndSay(4);
+		 int[] newtest = new int[10];
+		 newtest[0] = 9;
+		 newtest[1] = 8;
+		 newtest[2] = 7;
+		 newtest[3] = 6;
+		 newtest[4] = 5;
+		 newtest[5] = 4;
+		 newtest[6] = 3;
+		 newtest[7] = 2;
+		 newtest[8] = 1;
+		 newtest[9] = 0;
+		 plusOne(newtest);
 	 }
 }
