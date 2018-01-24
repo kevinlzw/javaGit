@@ -3,6 +3,7 @@ import java.util.Stack;
 
 public class test {
 	
+	// À´×Ôhttp://blog.csdn.net/happyaaaaaaaaaaa/article/details/48896239
 	public String addBinary(String a, String b) {
 		int maxLen = Math.max(a.length(), b.length());  
 	    StringBuilder sb = new StringBuilder();  
