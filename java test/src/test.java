@@ -3,6 +3,43 @@ import java.util.Stack;
 
 public class test {
 	
+	public int mySqrt(int x) {
+		return (int)Math.sqrt(x);
+    }
+	
+	public static int climbStairsBetter(int n) {
+		if(n <= 2) {
+			return n;
+		}
+		else {
+			int[] temp = new int[n];
+			temp[0] = 1;
+			temp[1] = 2;
+			for(int i = 2;  i < n; i++) {
+				temp[i] = temp[i-1] + temp[i-2];
+			}
+			return temp[n-1];
+		}
+	}
+	
+	public static int climbStairs(int n) {
+		return climbStairs(n, 0);
+    }
+	
+	public static int climbStairs(int n, int count) {
+		if(n == 1) {
+			return count + 1;
+		}
+		else if(n == 2) {
+			return count + 2;
+		}
+		else {
+			return climbStairs(n-1,count) + climbStairs(n-2,count);
+		}
+	}
+	
+	
+	
 	// 来自http://blog.csdn.net/happyaaaaaaaaaaa/article/details/48896239
 	public String addBinary(String a, String b) {
 		int maxLen = Math.max(a.length(), b.length());  
@@ -179,6 +216,63 @@ public class test {
 	      ListNode next;
 	      ListNode(int x) { val = x; }
 	  }
+	  
+	  // 源自 https://www.cnblogs.com/grandyang/p/4059650.html
+	  public static void merge1(int[] A, int m, int[] B, int n){
+		  int count = m + n - 1;
+	      --m; --n;
+	      while (m >= 0 && n >= 0) A[count--] = A[m] > B[n] ? A[m--] : B[n--];
+	      while (n >= 0) A[count--] = B[n--];  
+	  }
+	  
+	  public static void merge(int[] nums1, int m, int[] nums2, int n) {
+		  int[] result = new int[n+m];
+		  int count1 = 0;
+		  int count2 = 0;
+		  int count3 = 0;
+		  while(count1 != m && count2 != n) {
+			  if(nums1[count1] <= nums2[count2]) {
+				  result[count3] = nums1[count1];
+				  count1++;
+			  }
+			  else {
+				  result[count3] = nums2[count2];
+				  count2++;
+			  }
+			  count3++;
+		  }
+		  nums1 = result;
+		  if(m == 0){
+	            nums1 = nums2;
+	        }
+	    }
+	  
+	  
+	  
+	  
+	  
+	  public ListNode deleteDuplicates(ListNode head) {
+		  if (head == null) {
+			  return null;
+		  }
+		  ListNode temp = head;
+		  while(temp.next !=null) {
+			  if(temp.val == temp.next.val) {
+				  if(temp.next.next!=null) {
+					  temp.next = temp.next.next;
+					  continue;
+				  }
+				  else {
+					  temp.next = null;
+					  break;
+				  }
+			  }
+			  temp = temp.next;
+		  }
+		  return head;
+	  }
+	  
+	  
 	
 	public ListNode betterMergeTwoLists(ListNode l1, ListNode l2) {
 	        if(l1 == null) return l2;
@@ -348,5 +442,11 @@ public class test {
 		 newtest[8] = 1;
 		 newtest[9] = 0;
 		 plusOne(newtest);
+		 //System.out.println(climbStairs(44,0));
+		 //System.out.println(climbStairsBetter(44));
+		 int[] nums1 = new int[1];
+		 int[] nums2 = new int[1];
+		 nums2[0] =1;
+		 merge(nums1,0,nums2,1);
 	 }
 }
