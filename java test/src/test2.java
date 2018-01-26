@@ -7,6 +7,47 @@ public class test2 {
 	      TreeNode(int x) { val = x; }
 	  }
 	 
+	  public int maxDepthBetter(TreeNode root) {
+	        
+	        if (root == null) return 0;
+	        
+	        int lHeight = maxDepthBetter(root.left);
+	        int rHeight = maxDepthBetter(root.right);
+	        
+	        return Math.max(lHeight, rHeight)+1;
+	        
+	    }
+	  
+	  public int maxDepth(TreeNode root) {
+		  if(root == null) {
+			  return 0;
+		  }
+		  else {
+			  int depth = 1 + maxDepth(root.left,root.right);
+			  return depth;
+		  }
+	    }
+	  
+	  public int maxDepth(TreeNode left, TreeNode right) {
+		  if(left == null && right == null) {
+			  return 0;
+		  }
+		  else if(left == null) {
+			  int depth = 1 + maxDepth(right.left,right.right);
+			  return depth;
+		  }
+		  else if(right == null) {
+			  int depth = 1 + maxDepth(left.left,left.right);
+			  return depth;
+		  }
+		  else {
+			  int depth = 1 + Math.max(maxDepth(right.left,right.right), maxDepth(left.left,left.right));
+			  return depth;
+		  }
+	  }
+	  
+	  
+	  
 	  public boolean isSymmetricBetter(TreeNode root) {
 	        return root == null || isSymmetric(root.left, root.right);
 	    }
