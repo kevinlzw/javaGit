@@ -1,3 +1,8 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 
 public class test2 {
 	  public class TreeNode {
@@ -7,6 +12,47 @@ public class test2 {
 	      TreeNode(int x) { val = x; }
 	  }
 	 
+	  public List<List<Integer>> levelOrderBottom(TreeNode root) {
+			List<List<Integer>> res = new ArrayList<List<Integer>>();
+			if (root == null)
+				return res;
+			dfs(root, 0, res);
+	        Collections.reverse(res);
+	        return res;
+		}
+	    
+	    public void dfs(TreeNode root, int depth, List<List<Integer>> res) {
+	        if (root == null) {
+	            return;
+	        }
+	        if (depth == res.size()) {
+	            res.add(new ArrayList<>());
+	        }
+	        res.get(depth).add(root.val);
+	        dfs(root.left, depth + 1, res);
+	        dfs(root.right, depth + 1, res);
+	    }
+	  
+	  
+	  public boolean isSameTree(TreeNode p, TreeNode q) {
+		  if(p == null && q == null) {
+			  return true;
+		  }
+		  else if(p == null && q!=null) {
+			  return false;
+		  }
+		  else if(p != null && q == null) {
+			  return false;
+		  }
+		  else if (p.val != q.val) {
+			  return false;
+		  }
+		  else {
+			  return isSameTree(p.left,q.left) && isSameTree(p.right,q.right);
+		  }
+	    }
+	  
+	  
 	  public int maxDepthBetter(TreeNode root) {
 	        
 	        if (root == null) return 0;
