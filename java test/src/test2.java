@@ -1,7 +1,10 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 
 public class test2 {
@@ -12,6 +15,133 @@ public class test2 {
 	      TreeNode(int x) { val = x; }
 	  }
 	 
+	  class ListNode {
+		       int val;
+		       ListNode next;
+		       ListNode(int x) {
+		           val = x;
+		           next = null;
+		       }
+		   }
+	  
+	  public String convertToTitleNew(int n) {
+	        StringBuilder sb = new StringBuilder();
+	        while(n>0){
+	            n--;
+	            sb.insert(0,(char)('A'+n%26));
+	            n=n/26;
+	        }
+	        return sb.toString();   
+	    }
+	  
+	  
+	  public String convertToTitle(int n) {
+		  HashMap<Integer, String> convertchart = new HashMap<Integer, String>();
+		  convertchart.put(1, "A");
+		  convertchart.put(2, "B");
+		  convertchart.put(3, "C");
+		  convertchart.put(4, "D");
+		  convertchart.put(5, "E");
+		  convertchart.put(6, "F");
+		  convertchart.put(7, "G");
+		  convertchart.put(8, "H");
+		  convertchart.put(9, "I");
+		  convertchart.put(10, "J");
+		  convertchart.put(11, "K");
+		  convertchart.put(12, "L");
+		  convertchart.put(13, "M");
+		  convertchart.put(14, "N");
+		  convertchart.put(15, "O");
+		  convertchart.put(16, "P");
+		  convertchart.put(17, "Q");
+		  convertchart.put(18, "R");
+		  convertchart.put(19, "S");
+		  convertchart.put(20, "T");
+		  convertchart.put(21, "U");
+		  convertchart.put(22, "V");
+		  convertchart.put(23, "W");
+		  convertchart.put(24, "X");
+		  convertchart.put(25, "Y");
+		  convertchart.put(0, "Z");
+		  String result = "";
+		  while(n > 0) {
+			  int remin = n % 26;
+			  result = convertchart.get(remin) + result;
+              n--;
+			  n /= 26;
+		  }
+		  return result;
+	    }
+	  
+	  
+	  public int[] twoSum(int[] numbers, int target) {
+	        Map<Integer,Integer> map = new HashMap<>();
+	        for(int i=0;i<numbers.length;i++){
+	            if(numbers[i] > target){
+	                return null;
+	            }
+	            int comp = target - numbers[i];
+	            if(map.containsKey(comp)){
+	                return new int[]{map.get(comp),i};
+	            }
+	            map.put(numbers[i],i);
+	        }
+	        return null;
+	    }
+	  
+	  
+	  public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+		  HashSet<ListNode> Aset = new HashSet<ListNode>();
+		  if(headA == null|| headB == null) {
+			  return null;
+		  }
+		  ListNode A = headA;
+		  ListNode B = headB;
+		  while(A != null) {
+			  Aset.add(A);
+			  A = A.next;
+		  }
+		  while(B != null) {
+			  if(Aset.contains(B)) {
+				  return B;
+			  }
+			  B = B.next;
+		  }
+		  return null;
+	  }
+	  
+	  
+	  
+	  
+	  public boolean hasCycle(ListNode head) {
+	        if(head == null || head.next == null) {
+	        	return false;
+	        }
+	        ListNode onestep = head;
+	        ListNode twostep = head.next;
+	        while(onestep.next != null && twostep.next != null && twostep.next.next != null) {
+	        	if(onestep == twostep) {
+	        		return true;
+	        	}
+	        	else {
+	        		onestep = onestep.next;
+	        		twostep = twostep.next.next;
+	        	}
+	        }
+	        return false;
+	    }
+	  
+	  
+	  public int singleNumber(int[] nums) {
+		  int result = 0;
+		    for (int i = 0; i<nums.length; i++)
+		    {
+		        result ^=nums[i];
+		    }
+		    return result;
+	    }
+	  
+	  
 	  // Origins from https://www.programcreek.com/2013/01/leetcode-valid-palindrome-java/
 	  public boolean isPalindrome(String s) {
 		  s = s.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
